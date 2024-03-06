@@ -1,0 +1,33 @@
+* {
+    margin: o;
+    padding: 0;
+}
+
+.row, .column {
+    display: flex;
+}
+
+h1 {
+    font-size: 50px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.container-fluid h2, .container-fluid input, .container-fluid button, .container-fluid hr {
+    width: 100%;
+    margin-top: 6px;
+    margin-bottom: 6px; 
+}
+
+#today {
+    justify-content: center;
+    border: 10px;
+    border-color: black;
+} 
+
+.five-day-card {
+    background-color: aqua;
+    border: 10px;
+    border-color: black;
+    justify-content: space;
+}

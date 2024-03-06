@@ -3,6 +3,7 @@ https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 // api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 var cityName = 'London'
 var forecastContainer = document.getElementById('forecast')
+var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || []
 
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
@@ -60,7 +61,11 @@ function renderForecastCard(forecast) {
 
     col.setAttribute('class', 'col-md');
     col.classList.add('five-day-card');
-    card.setAttribute('class', 'card bg-primary h-100 text-white');
+    col.style.border = '1px solid black'; // Add black border
+    col.style.margin = '10px';
+    col.style.padding = '10px'; // Add spacing
+    col.style.backgroundColor = 'grey';
+    card.setAttribute('class', 'card bg-dark h-100 text-white');
     cardBody.setAttribute('class', 'card-body p-2');
     cardTitle.setAttribute('class', 'card-title');
     tempEl.setAttribute('class', 'card-text');
@@ -71,7 +76,7 @@ function renderForecastCard(forecast) {
     weatherIcon.setAttribute('src', iconUrl);
     weatherIcon.setAttribute('alt', iconDescription);
     tempEl.textContent = `Temp: ${tempF} °F`;
-    windEl.textContent = `Wind: ${windMph} MPH`;
+    windEl.textContent = `Wind: ${windSpeed} MPH`;
     humidityEl.textContent = `Humidity: ${humidity} %`;
 
     forecastContainer.append(col);
@@ -105,7 +110,8 @@ function appendForcast(dailyForecast) {
 // Function, For loops, objects 
 function appendData(data) {
     $('#cityName').text(data.name)
-    $('#currentTemp').text(data.main.temp)
+    $('#currentDate').text(data.date)
+    $('#currentTemp').text(data.main.temp,)
     $('#currentHumidity').text(data.main.humidity)
     $('#currentWindSpeed').text(data.wind.speed)
 }
@@ -115,7 +121,9 @@ function searchCity(event) {
     var searchInput = document.getElementById('search-input')
 
     cityName = searchInput.value.trim()
-
+    searchHistory.push(cityName)
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
+    // console.log(searchHistory);
     inputCity(cityName)
 }
 
