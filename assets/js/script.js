@@ -112,15 +112,17 @@ function appendForcast(dailyForecast) {
 // Function, For loops, objects 
 function appendData(data) {
     $('#cityName').text(data.name)
-    $('#currentDate').text(data.date)
-    $('#currentTemp').text(data.main.temp,)
-    $('#currentHumidity').text(data.main.humidity)
-    $('#currentWindSpeed').text(data.wind.speed)
+    $('#currentDate').text(dayjs())
+    $('#currentTemp').html(`Temp: ${data.main.temp} <span>°F<span>`)
+    $('#currentHumidity').html(`Humidity: ${data.main.humidity} <span>%<span>`)
+    $('#currentWindSpeed').html(`Wind Speed: ${data.wind.speed} <span>MPH<span>`)
+    $('#currentIcon').attr('src', `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
 
     var todayWeatherDiv = document.querySelector('.todayWeather');
     todayWeatherDiv.style.border = '10px solid black';
     todayWeatherDiv.style.backgroundColor = '#006469';
     todayWeatherDiv.style.color = 'white';
+    todayWeatherDiv.style.padding = '20px';
 }
 
 
@@ -153,6 +155,11 @@ function renderSearchHistory() {
         button.classList.add('list-group-item', 'btn-dark', 'list-group-item-action');
         button.setAttribute('data-search', searchHistory[i]);
         button.textContent = searchHistory[i];
+
+        button.style.backgroundColor = '#006469';
+        button.style.color = 'white';
+        button.style.textAlign = 'center'
+    
 
         button.addEventListener('click', function (event) {
             var selectedSearch = event.target.getAttribute('data-search');
