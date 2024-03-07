@@ -80,6 +80,8 @@ function renderForecastCard(forecast) {
     humidityEl.textContent = `Humidity: ${humidity} %`;
 
     forecastContainer.append(col);
+
+    
 }
 function appendForcast(dailyForecast) {
 
@@ -114,7 +116,13 @@ function appendData(data) {
     $('#currentTemp').text(data.main.temp,)
     $('#currentHumidity').text(data.main.humidity)
     $('#currentWindSpeed').text(data.wind.speed)
+
+    var todayWeatherDiv = document.querySelector('.todayWeather');
+    todayWeatherDiv.style.border = '10px solid black';
+    todayWeatherDiv.style.backgroundColor = '#006469';
+    todayWeatherDiv.style.color = 'white';
 }
+
 
 function searchCity(event) {
     event.preventDefault()
@@ -142,7 +150,7 @@ function renderSearchHistory() {
         var button = document.createElement('button');
         button.type = 'button';
         button.setAttribute('aria-controls', 'today forecast');
-        button.classList.add('list-group-item', 'list-group-item-action');
+        button.classList.add('list-group-item', 'btn-dark', 'list-group-item-action');
         button.setAttribute('data-search', searchHistory[i]);
         button.textContent = searchHistory[i];
 
