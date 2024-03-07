@@ -19,6 +19,12 @@ Utilising Javascript, JQuery, and Server APIs this application allows a user to 
 No installation is required as the project is a live web application.
 
 ## Usage
+Open the application in your web-browser vis this URL: https://harrynewt0n.github.io/weather-dashboard/
+
+The application should return a webpage that looks like this:
+
+![Application screenshot](<assets/images/Application Screenshot.jpg>)
+
 Click on the search bar and enter a city name, then hit the search button. The application will then return the current weather, as well as a 5 day forecast. Previous searches will appear below the search bar, and they can be clicked to search that city's forecast again. 
 
 ## License
