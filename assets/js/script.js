@@ -135,6 +135,8 @@ function searchCity(event) {
     localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
     renderSearchHistory();
     inputCity(cityName)
+
+    searchInput.value = '';
 }
 
 $('#search-form').submit(searchCity)
@@ -168,6 +170,28 @@ function renderSearchHistory() {
 
         searchHistoryContainer.appendChild(button);
     }
+}
+
+var clearStorageButton = document.createElement('button');
+    clearStorageButton.type = 'button';
+    clearStorageButton.classList.add('btn', 'btn-danger');
+    clearStorageButton.textContent = 'Clear History';
+
+    clearStorageButton.addEventListener('click', function () {
+        clearLocalStorage();
+    });
+
+    var clearHistoryContainer = document.getElementById('clearHistory');
+
+    clearHistoryContainer.appendChild(clearStorageButton);
+
+
+function clearLocalStorage() {
+    searchHistory = [];
+    // Clear local storage
+    localStorage.clear();
+    // Render updated search history (empty)
+    renderSearchHistory();
 }
 
 
