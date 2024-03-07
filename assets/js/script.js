@@ -123,8 +123,62 @@ function searchCity(event) {
     cityName = searchInput.value.trim()
     searchHistory.push(cityName)
     localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
-    // console.log(searchHistory);
+    renderSearchHistory();
     inputCity(cityName)
 }
 
 $('#search-form').submit(searchCity)
+
+var searchHistoryContainer = document.getElementById('history');
+
+
+function renderSearchHistory() {
+
+    searchHistoryContainer.innerHTML = '';
+
+
+    for (var i = 0; i < searchHistory.length; i++) {
+
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.setAttribute('aria-controls', 'today forecast');
+        button.classList.add('list-group-item', 'list-group-item-action');
+        button.setAttribute('data-search', searchHistory[i]);
+        button.textContent = searchHistory[i];
+
+        button.addEventListener('click', function (event) {
+            var selectedSearch = event.target.getAttribute('data-search');
+            inputCity(selectedSearch);
+        });
+
+        searchHistoryContainer.appendChild(button);
+    }
+}
+
+
+function appendToHistory(search) {
+
+    if (searchHistory.includes(search)) {
+        return;
+    }
+
+    searchHistory.push(search);
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+    renderSearchHistory();
+}
+
+
+function initSearchHistory() {
+
+    var storedHistory = localStorage.getItem('search-history');
+
+
+    if (storedHistory) {
+        searchHistory = JSON.parse(storedHistory);
+    }
+
+
+    renderSearchHistory();
+}
+
+document.addEventListener('DOMContentLoaded', initSearchHistory);
